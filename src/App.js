@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  const [username, setUsername] = useState("arrizal");
+  const [username, setUsername] = useState("Santoso Dwi");
   const [password, setPassword] = useState("");
   const [profile, setProfile] = useState({});
   const [books, setBooks] = useState([]);
@@ -34,11 +34,13 @@ function App() {
     const getBooks = async () => {
       setBooksLoading(true);
       const res = await fetch("https://www.anapioficeandfire.com/api/books");
-      const data = await res.json();
+      let data = await res.json();
+      data = data.map((el) => {
+        return el.name;
+      });
       setBooks(data);
       setBooksLoading(false);
     };
-
     getBooks();
   }, []); // sama kyk componentDidMount
 
